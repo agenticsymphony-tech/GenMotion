@@ -649,7 +649,7 @@ document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y' && !typing) { e.preventDefault(); step(redo, undo); return; }
   if (typing) return;
   if (e.key === ' ') { e.preventDefault(); setPlaying(!playing); }
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); setPlaying(false); t = Math.max(0, t + (e.key === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? 1 : 1 / sb.fps)); draw(); }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); setPlaying(false); t = Math.max(0, Math.min(timeline(sb).duration - 1e-3, t + (e.key === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? 1 : 1 / sb.fps))); draw(); }
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); seekScene(Math.max(0, Math.min(sb.scenes.length - 1, sel + (e.key === 'ArrowDown' ? 1 : -1)))); }
 });
 new ResizeObserver(() => draw()).observe($('track'));
